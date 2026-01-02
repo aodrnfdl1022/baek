@@ -6,6 +6,7 @@
     <title>서비스디자인연구실 | KIT</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- [기본 초기화] --- */
         *{margin:0;padding:0;box-sizing:border-box}
         :root{
             --black:#000;--white:#fff;--cream:#fdfcfa;
@@ -16,32 +17,34 @@
         html{scroll-behavior:smooth}
         body{font-family:'Noto Sans KR',sans-serif;background:var(--white);color:var(--gray-900);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-        /* Custom Cursor */
+        /* --- [유틸리티] --- */
         .cursor{width:40px;height:40px;border:1px solid var(--gray-400);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:all .1s ease-out;opacity:0}
         body:hover .cursor{opacity:1}
-
-        /* Scroll Progress */
         .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--blue));z-index:10000;width:0%;transition:width .1s}
 
-        /* Navigation */
+        /* --- [네비게이션 (PC 기본)] --- */
         nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;transition:all .5s cubic-bezier(.4,0,.2,1)}
         nav.scrolled{background:rgba(255,255,255,.9);backdrop-filter:blur(20px);padding:16px 48px;box-shadow:0 1px 0 rgba(0,0,0,.05)}
-        .logo{display:flex;align-items:center;gap:16px;cursor:pointer}
+        
+        .logo{display:flex;align-items:center;gap:16px;cursor:pointer; z-index: 1001;}
         .logo img{height:44px;transition:.3s}
         .logo-text h1{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:600;letter-spacing:-.5px}
         .logo-text p{font-size:.6rem;color:var(--gray-500);letter-spacing:1px;margin-top:2px}
+        
         .nav-links{display:flex;gap:8px}
         .nav-links a{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:500;color:var(--gray-600);padding:10px 20px;border-radius:100px;cursor:pointer;transition:.3s;letter-spacing:.3px}
         .nav-links a:hover{color:var(--gray-900);background:var(--gray-100)}
         .nav-links a.active{background:var(--gray-900);color:var(--white)}
-        .menu-toggle{display:none;width:48px;height:48px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;flex-direction:column;gap:6px;align-items:center;justify-content:center}
+        
+        /* 모바일 메뉴 버튼 (PC에선 숨김) */
+        .menu-toggle{display:none;width:48px;height:48px;border-radius:50%;background:var(--gray-100);border:none;cursor:pointer;flex-direction:column;gap:6px;align-items:center;justify-content:center; z-index: 1001;}
         .menu-toggle span{width:20px;height:1.5px;background:var(--gray-900);transition:.3s}
 
-        /* Pages */
+        /* --- [페이지 전환 효과] --- */
         .page{display:none;opacity:0;transform:translateY(20px);transition:all .5s}
         .page.active{display:block;opacity:1;transform:translateY(0)}
 
-        /* Hero Section */
+        /* --- [HERO 섹션] --- */
         .hero{min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;position:relative;overflow:hidden}
         .hero::before{content:'';position:absolute;top:-50%;right:-20%;width:80%;height:200%;background:radial-gradient(ellipse at center,rgba(230,57,70,.03) 0%,transparent 70%);pointer-events:none}
         .hero-content{max-width:650px;position:relative;z-index:2}
@@ -56,13 +59,14 @@
         .btn-primary:hover{background:var(--black);transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,0,0,.15)}
         .btn-ghost{background:transparent;color:var(--gray-700);border:1.5px solid var(--gray-300)}
         .btn-ghost:hover{border-color:var(--gray-900);color:var(--gray-900)}
+        
         .hero-visual{position:absolute;right:0;top:50%;transform:translateY(-50%);width:45%;height:80%;display:flex;gap:16px;padding-right:48px}
         .hero-col{flex:1;display:flex;flex-direction:column;gap:16px}
         .hero-col:nth-child(2){margin-top:60px}
         .hero-img{flex:1;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.08)}
         .hero-img img{width:100%;height:100%;object-fit:cover}
 
-        /* About Section */
+        /* --- [ABOUT] --- */
         .about{padding:140px 48px;background:var(--cream)}
         .about-wrapper{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
         .about-visual{position:relative}
@@ -73,18 +77,16 @@
         .section-eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:4px;color:var(--accent);margin-bottom:16px}
         .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;letter-spacing:-1px;line-height:1.2;margin-bottom:24px}
         .about-text{font-size:1.05rem;color:var(--gray-600);line-height:2;margin-bottom:16px}
-        .about-text strong{color:var(--gray-900);font-weight:600}
         .about-features{display:flex;gap:40px;margin-top:48px;padding-top:48px;border-top:1px solid var(--gray-200)}
         .feature{text-align:center}
         .feature-icon{font-size:2rem;margin-bottom:12px}
-        .feature-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:4px}
+        .feature-title{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600}
         .feature-desc{font-size:.8rem;color:var(--gray-500)}
 
-        /* Projects Section */
+        /* --- [PROJECTS] --- */
         .projects{padding:140px 48px;background:var(--gray-900);position:relative;overflow:hidden}
         .projects::before{content:'PROJECT';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Grotesk',sans-serif;font-size:18vw;font-weight:700;color:rgba(255,255,255,.02);white-space:nowrap;pointer-events:none}
         .projects-header{max-width:1400px;margin:0 auto 60px;display:flex;justify-content:space-between;align-items:flex-end}
-        .projects .section-eyebrow{color:rgba(255,255,255,.5)}
         .projects .section-title{color:var(--white)}
         .projects-link{color:var(--gray-400);font-size:.85rem;cursor:pointer;transition:.3s;font-family:'Space Grotesk',sans-serif}
         .projects-link:hover{color:var(--white)}
@@ -99,56 +101,55 @@
         .project-body h3{color:var(--white);font-size:1.1rem;font-weight:600;margin-bottom:10px;line-height:1.4}
         .project-body p{font-size:.85rem;color:var(--gray-400);line-height:1.7}
 
-        /* Location */
+        /* --- [LOCATION] --- */
         .location{padding:140px 48px;background:var(--white)}
         .location-wrapper{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:80px;align-items:center}
         .location-items{display:flex;flex-direction:column;gap:16px;margin-top:40px}
         .location-item{display:flex;gap:20px;padding:24px;background:var(--gray-50);border-radius:16px;transition:.3s}
         .location-item:hover{background:var(--white);box-shadow:0 8px 32px rgba(0,0,0,.06);transform:translateX(8px)}
         .location-icon{width:48px;height:48px;background:var(--gray-900);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-        .location-text h4{font-weight:600;margin-bottom:4px;font-size:.95rem}
-        .location-text p{font-size:.9rem;color:var(--gray-500);line-height:1.5}
         .location-map{border-radius:24px;overflow:hidden;height:450px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
         .location-map img{width:100%;height:100%;object-fit:cover}
 
-        /* Footer */
+        /* --- [FOOTER] --- */
         footer{background:var(--black);color:var(--white);padding:80px 48px 32px}
         .footer-grid{max-width:1400px;margin:0 auto 60px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:80px}
         .footer-brand p{color:var(--gray-500);margin-top:20px;line-height:1.9;font-size:.9rem}
         footer h4{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:2px;margin-bottom:20px;color:var(--gray-400)}
         .footer-links a{display:block;color:var(--gray-400);margin-bottom:12px;font-size:.9rem;cursor:pointer;transition:.3s}
-        .footer-links a:hover{color:var(--white)}
-        .footer-contact p{color:var(--gray-500);font-size:.9rem;line-height:2}
         .footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:32px;text-align:center;max-width:1400px;margin:0 auto}
-        .footer-bottom p{color:var(--gray-600);font-size:.75rem}
 
-        /* Page Hero */
+        /* --- [SUB PAGE HERO] --- */
         .page-hero{height:55vh;min-height:400px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
         .page-hero-bg{position:absolute;inset:0}
         .page-hero-bg img{width:100%;height:100%;object-fit:cover}
         .page-hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.7))}
         .page-hero-content{position:relative;z-index:2;color:var(--white)}
-        .page-hero-content .section-eyebrow{color:rgba(255,255,255,.6)}
         .page-hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;letter-spacing:-2px}
-        .page-hero p{color:rgba(255,255,255,.6);font-size:1.1rem;margin-top:12px}
 
-        /* Professor Page */
+        /* --- [PROFESSOR] --- */
         .professor-main{padding:100px 48px;background:var(--white)}
         .professor-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:80px}
-        .professor-photo{position:relative}
         .professor-photo>img{width:100%;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,.1)}
-        .professor-photo::before{content:'';position:absolute;top:-16px;left:-16px;right:16px;bottom:16px;border:2px solid var(--accent);border-radius:20px;z-index:-1}
-        .professor-info h2{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;letter-spacing:-1px;margin-bottom:4px}
-        .professor-info .name-en{font-family:'Space Grotesk',sans-serif;font-size:1rem;color:var(--gray-400);margin-bottom:16px}
-        .professor-roles{margin-bottom:32px}
-        .professor-roles p{font-size:.95rem;color:var(--gray-600);line-height:1.8}
         .professor-contacts{display:flex;flex-direction:column;gap:10px;margin-bottom:40px}
         .contact-row{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--gray-50);border-radius:10px;font-size:.9rem}
-        .contact-row .icon{font-size:1rem}
-        .contact-row .label{color:var(--gray-400);min-width:50px;font-size:.8rem}
-        .contact-row .value{color:var(--gray-900);font-weight:500}
+        .info-sections{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:48px;padding-top:48px;border-top:1px solid var(--gray-200)}
+        .info-box h3{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:2px;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+        .info-box h3::before{content:'';width:20px;height:2px;background:var(--accent)}
+        .info-box ul{list-style:none}
+        .info-box li{padding:10px 0;border-bottom:1px solid var(--gray-100);color:var(--gray-600);font-size:.9rem;line-height:1.6}
 
-        /* Auto Slider */
+        /* --- [MEMBER & OTHERS] --- */
+        .members-main{padding:80px 48px;background:var(--cream)}
+        .members-wrapper{max-width:1200px;margin:0 auto}
+        .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+        .member-card{background:var(--white);padding:28px;border-radius:20px;display:flex;gap:20px;transition:.4s;border:1px solid var(--gray-200)}
+        .member-avatar{width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid var(--gray-100)}
+        .member-avatar img{width:100%;height:100%;object-fit:cover}
+        .alumni-section{margin-top:40px;padding:40px;background:var(--white);border-radius:24px}
+        .alumni-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+
+        /* --- [GALLERY SLIDER] --- */
         .slider-section{margin:60px 0;padding:40px 0;background:var(--gray-50);overflow:hidden}
         .slider-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;text-align:center;margin-bottom:24px;color:var(--gray-900)}
         .slider-track{display:flex;gap:20px;animation:slide 25s linear infinite;width:max-content}
@@ -157,50 +158,14 @@
         .slider-item{width:300px;height:200px;border-radius:16px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 30px rgba(0,0,0,.08)}
         .slider-item img{width:100%;height:100%;object-fit:cover}
 
-        /* Info Sections */
-        .info-sections{display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:48px;padding-top:48px;border-top:1px solid var(--gray-200)}
-        .info-box h3{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:2px;color:var(--accent);margin-bottom:20px;display:flex;align-items:center;gap:8px}
-        .info-box h3::before{content:'';width:20px;height:2px;background:var(--accent)}
-        .info-box ul{list-style:none}
-        .info-box li{padding:10px 0;border-bottom:1px solid var(--gray-100);color:var(--gray-600);font-size:.9rem;line-height:1.6}
-
-        /* Books & Patents */
+        /* --- [BOOKS] --- */
         .books-patents{padding:80px 48px;background:var(--cream)}
         .bp-wrapper{max-width:1200px;margin:0 auto}
         .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px}
-        .bp-section h3{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:600;margin-bottom:24px;display:flex;align-items:center;gap:12px}
-        .bp-section h3 .count{font-size:.75rem;background:var(--accent);color:var(--white);padding:4px 10px;border-radius:50px}
-        .bp-list{display:flex;flex-direction:column;gap:8px}
         .bp-item{padding:16px 20px;background:var(--white);border-radius:12px;font-size:.9rem;color:var(--gray-700);line-height:1.5;transition:.3s;border-left:3px solid transparent}
         .bp-item:hover{border-left-color:var(--accent);transform:translateX(4px)}
-        .bp-item .year{color:var(--gray-400);font-size:.8rem}
 
-        /* Members Page */
-        .members-main{padding:80px 48px;background:var(--cream)}
-        .members-wrapper{max-width:1200px;margin:0 auto}
-        .member-group{margin-bottom:60px}
-        .member-group-title{font-family:'Space Grotesk',sans-serif;font-size:1.2rem;font-weight:600;margin-bottom:28px;display:flex;align-items:center;gap:16px}
-        .member-group-title::after{content:'';flex:1;height:1px;background:var(--gray-300)}
-        .members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-        .member-card{background:var(--white);padding:28px;border-radius:20px;display:flex;gap:20px;transition:.4s;border:1px solid var(--gray-200)}
-        .member-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.08);transform:translateY(-4px);border-color:var(--accent)}
-        .member-avatar{width:80px;height:80px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid var(--gray-100)}
-        .member-avatar img{width:100%;height:100%;object-fit:cover}
-        .member-details h3{font-size:1.1rem;font-weight:600;margin-bottom:2px}
-        .member-details .name-en{font-family:'Space Grotesk',sans-serif;font-size:.7rem;color:var(--gray-400);margin-bottom:6px}
-        .member-position{font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:8px}
-        .member-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-        .member-tags span{font-size:.65rem;padding:4px 10px;background:var(--gray-100);border-radius:50px;color:var(--gray-600)}
-        .member-email{font-size:.75rem;color:var(--gray-400);margin-top:8px}
-
-        /* Alumni */
-        .alumni-section{margin-top:40px;padding:40px;background:var(--white);border-radius:24px}
-        .alumni-section h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:24px}
-        .alumni-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-        .alumni-box h4{font-size:.8rem;color:var(--gray-400);margin-bottom:12px;font-weight:500}
-        .alumni-box p{font-size:.85rem;color:var(--gray-600);line-height:1.9}
-
-        /* Project Page */
+        /* --- [PROJECT LIST] --- */
         .project-main{padding:80px 48px;background:var(--white)}
         .project-wrapper{max-width:1200px;margin:0 auto}
         .project-filters{display:flex;gap:8px;margin-bottom:40px;flex-wrap:wrap}
@@ -209,48 +174,69 @@
         .filter-btn.active{background:var(--gray-900);color:var(--white)}
         .project-list{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
         .project-item{background:var(--gray-50);border-radius:20px;overflow:hidden;transition:.4s;cursor:pointer}
-        .project-item:hover{box-shadow:0 20px 60px rgba(0,0,0,.1);transform:translateY(-6px)}
-        .project-item:hover .project-item-img img{transform:scale(1.03)}
-        .project-item.hidden{display:none}
         .project-item-img{height:260px;overflow:hidden}
         .project-item-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
-        .project-item-body{padding:28px}
-        .project-tags-row{display:flex;gap:8px;margin-bottom:14px}
         .tag{font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:600;padding:6px 14px;border-radius:50px;letter-spacing:.5px}
         .tag-year{background:var(--accent);color:var(--white)}
         .tag-cat{background:var(--gray-200);color:var(--gray-700)}
-        .project-item-body h3{font-family:'Space Grotesk',sans-serif;font-size:1.25rem;font-weight:600;margin-bottom:10px;letter-spacing:-.5px}
-        .project-item-body p{color:var(--gray-500);line-height:1.8;font-size:.9rem}
 
-        /* Contact Page */
+        /* --- [CONTACT] --- */
         .contact-main{padding:80px 48px;background:var(--cream)}
         .contact-wrapper{max-width:1200px;margin:0 auto}
         .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px}
-        .contact-cards{display:flex;flex-direction:column;gap:16px}
         .contact-card{padding:24px;background:var(--white);border-radius:16px;display:flex;gap:20px;transition:.3s;border:1px solid var(--gray-200)}
-        .contact-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.06);border-color:var(--accent);transform:translateX(8px)}
-        .contact-card-icon{width:48px;height:48px;background:var(--gray-900);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-        .contact-card-content h3{font-weight:600;margin-bottom:4px;font-size:.95rem}
-        .contact-card-content p{color:var(--gray-500);line-height:1.6;font-size:.9rem}
         .contact-map{border-radius:20px;overflow:hidden;height:100%;min-height:420px;box-shadow:0 20px 60px rgba(0,0,0,.08)}
         .contact-map img{width:100%;height:100%;object-fit:cover}
 
-        /* Responsive */
+        /* =================================================================
+           🔥🔥🔥 [모바일/태블릿 반응형 핵심 수정 구역] 🔥🔥🔥
+           ================================================================= */
         @media(max-width:1024px){
+            /* 1. 네비게이션: 가로 메뉴 숨기고 햄버거 메뉴 활성화 */
             nav{padding:16px 24px}
-            .nav-links{display:none;position:fixed;inset:0;background:var(--white);flex-direction:column;padding:100px 32px;gap:8px;z-index:999}
+            .nav-links{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(255,255,255,0.98);flex-direction:column;justify-content:center;align-items:center;padding:0;gap:32px;z-index:999}
             .nav-links.active{display:flex}
-            .nav-links a{font-size:1.3rem;padding:16px}
+            .nav-links a{font-size:1.5rem;padding:10px}
             .menu-toggle{display:flex}
-            .hero{padding:120px 24px 60px}
-            .hero-visual{display:none}
-            .hero-content{max-width:100%}
-            .about,.projects,.location{padding:80px 24px}
-            .about-wrapper,.location-wrapper,.professor-grid,.contact-grid{grid-template-columns:1fr}
-            .projects-grid,.project-list{grid-template-columns:1fr}
-            .footer-grid{grid-template-columns:1fr;gap:40px}
-            footer{padding:60px 24px 24px}
-            .info-sections,.bp-grid,.alumni-grid{grid-template-columns:1fr}
+
+            /* 2. 전체 섹션 여백 축소 (80px/140px -> 40px/60px) */
+            .hero{padding:120px 24px 60px; min-height:auto; display:block;}
+            .about, .projects, .location, .professor-main, .members-main, .project-main, .contact-main, .books-patents, footer{
+                padding: 60px 24px;
+            }
+
+            /* 3. 그리드 해제: 2열/3열 -> 1열 (세로 정렬) */
+            .about-wrapper, .location-wrapper, .professor-grid, .contact-grid, .footer-grid, .info-sections, .bp-grid, .alumni-grid{
+                grid-template-columns:1fr;
+                gap: 40px;
+            }
+            .projects-grid, .project-list{
+                grid-template-columns:1fr; /* 프로젝트 카드 1열로 */
+            }
+            .members-grid{
+                grid-template-columns: 1fr; /* 멤버 카드 1열로 */
+            }
+
+            /* 4. Hero 섹션 모바일 최적화 */
+            .hero-visual{display:none} /* 모바일에서 이미지 숨김 (텍스트 집중) */
+            .hero-content{max-width:100%; text-align:center; margin: 0 auto;}
+            .hero h1{font-size: 2.8rem;} /* 제목 크기 축소 */
+            .hero-cta{justify-content: center;}
+            .hero-eyebrow{justify-content: center;}
+
+            /* 5. 기타 요소 크기 조정 */
+            .professor-photo{max-width:100%; margin:0 auto;} /* 교수 사진 중앙 */
+            .about-float{position:static; transform:none; margin-top:20px; text-align:center; width:100%;} /* 둥둥 떠있는 박스 위치 잡기 */
+            .projects-header{flex-direction:column; align-items:flex-start; gap:20px;}
+            .contact-map{min-height:300px;}
+            .slider-item{width:240px; height:160px;} /* 갤러리 이미지 크기 축소 */
+        }
+
+        /* 초소형 스마트폰 대응 */
+        @media(max-width:480px){
+            .hero h1{font-size: 2.2rem;}
+            .section-title{font-size: 1.8rem;}
+            .nav-links a{font-size: 1.2rem;}
         }
     </style>
 </head>
@@ -633,10 +619,15 @@ function showPage(id){
     document.getElementById(id).classList.add('active');
     document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
     document.querySelector(`[data-page="${id}"]`)?.classList.add('active');
+    
+    // 모바일에서 메뉴 클릭시 자동으로 닫히게 처리
     document.querySelector('.nav-links').classList.remove('active');
+    
     window.scrollTo({top:0,behavior:'smooth'});
 }
-function toggleMenu(){document.querySelector('.nav-links').classList.toggle('active')}
+function toggleMenu(){
+    document.querySelector('.nav-links').classList.toggle('active');
+}
 function filterProjects(year){
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     event.target.classList.add('active');
